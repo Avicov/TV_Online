@@ -17,6 +17,18 @@ class Controller
     $canal=CanalRepository::getInstance()->getCanalByNro(14);
     $view->showIndex($canal);
   }
+  public function siguiente($nro){
+    $view=new View();
+    $nros=CanalRepository::getInstance()->getListNros();
+    $nroCanal=$nro;
+    foreach ($nros as $key => $value) {
+        if($value['numero']==$nro){
+          $nroCanal=$nros[$key+1]['numero'];
+        }
+    }
+    $canal=CanalRepository::getInstance()->getCanalByNro($nroCanal);
+    $view->showIndex($canal);
+  }
   public function indexAdmin(){
     $view= new View();
     $view->showIndexAdmin();

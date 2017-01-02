@@ -18,4 +18,10 @@ class CanalRepository extends PDORepository{
     	$answer=$this->queryList("SELECT * FROM canales WHERE numero=?",[$nro],$mapper);
     	return $answer[0];
 	}
+
+	public function getListNros(){
+		$answer=$this->queryInnerList(
+			"SELECT numero FROM canales ORDER BY numero ASC",[]);
+		return $answer;
+	}
 }
