@@ -1,0 +1,23 @@
+{% extends 'template.html.twig' %}
+{% block content %}
+<script type="text/javascript">
+  $(document).ready(function() {
+        
+    });
+
+    function buscar() {
+
+        if (true) {
+            $.post("controller/conexion.php", {}, 
+            function(mensaje) {
+              var text=JSON.parse(mensaje);
+              $("#mensajeResultado").html(text.mensaje);
+            });
+        } else {
+            $("#mensajeResultado").html('');
+        };
+    };
+    </script>
+    <a href="?action=control">Control Remoto</a>
+	<p id="mensajeResultado"></p>
+{% endblock %}	
