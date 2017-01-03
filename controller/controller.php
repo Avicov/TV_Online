@@ -17,16 +17,36 @@ class Controller
     $canal=CanalRepository::getInstance()->getCanalByNro(14);
     $view->showIndex($canal);
   }
-  public function siguiente($nro){
+  public function siguiente(){
     $view=new View();
     $nros=CanalRepository::getInstance()->getListNros();
-    $nroCanal=$nro;
+    $nroCanal=UltimoRepository::getInstance()->getUltimo()->getUltimoNro();
+    $num=$nroCanal;
     foreach ($nros as $key => $value) {
-        if($value['numero']==$nro){
-          $nroCanal=$nros[$key+1]['numero'];
+        if($value['numero']==$num){
+          if(sizeof($nros)-1 != $key){
+            $nroCanal=$nros[$key+1]['numero'];
+          }
         }
     }
     $canal=CanalRepository::getInstance()->getCanalByNro($nroCanal);
+    UltimoRepository::getInstance()->actualizarUlt($nroCanal);
+    $view->showIndex($canal);
+  }
+  public function anterior(){
+    $view=new View();
+    $nros=CanalRepository::getInstance()->getListNrosDesc();
+    $nroCanal=UltimoRepository::getInstance()->getUltimo()->getUltimoNro();
+    $num=$nroCanal;
+    foreach ($nros as $key => $value) {
+        if($value['numero']==$num){
+          if(sizeof($nros)-1 != $key){
+            $nroCanal=$nros[$key+1]['numero'];
+          }
+        }
+    }
+    $canal=CanalRepository::getInstance()->getCanalByNro($nroCanal);
+    UltimoRepository::getInstance()->actualizarUlt($nroCanal);
     $view->showIndex($canal);
   }
   public function indexAdmin(){

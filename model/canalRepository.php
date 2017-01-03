@@ -24,4 +24,15 @@ class CanalRepository extends PDORepository{
 			"SELECT numero FROM canales ORDER BY numero ASC",[]);
 		return $answer;
 	}
+	public function getListNrosDesc(){
+		$answer=$this->queryInnerList(
+			"SELECT numero FROM canales ORDER BY numero DESC",[]);
+		return $answer;
+	}
+
+	public function getLastCanal(){
+		$answer=$this->queryInnerList(
+			"SELECT ultimoNro FROM ultimo",[]);
+		return $answer;
+	}
 }
